@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+// эта библиотека мне давно нравится куда больше, чем fetch
+import axios from 'axios'
 
 class Usual extends Component {
   state = {
@@ -11,13 +13,21 @@ class Usual extends Component {
     const peopleURL = 'https://swapi.co/api/people/'
     const planetsURL = 'https://swapi.co/api/planets/'
 
+    axios(planetsURL).then(response => {
+      // у axios response уже сразу имеет "data" и не надо писать .json()
+      // вывожу данные в консоль, чтобы ты мог посмотреть, что еще ты можешь использовать (если интересно)
+      console.log('axios data:', response.data)
+      // использую setState, чтобы компоненты рендерились
+      this.setState({ axiosData: response.data })
+    })
+
     // fetch встроен в большинство современных браузеров
     fetch(peopleURL)
       // нужно респонс сконвертировать в json и передать дальше
       .then(response => response.json())
       .then(data => {
         // вывожу данные в консоль, чтобы ты мог посмотреть, что еще ты можешь использовать (если интересно)
-        console.log(data)
+        console.log('fetch data:', data)
         // использую setState, чтобы компоненты рендерились
         this.setState({ fetchData: data })
       })
