@@ -39,10 +39,11 @@ class Usual extends Component {
     const { fetchData, axiosData } = this.state
     return (
       <div>
+        <h1>Using Star Wars API</h1>
         {/* если есть fetch данные - рендерим с ними параграф */}
-        {fetchData && <p>Fetch data: {fetchData.count}</p>}
+        {fetchData && <p>Fetch data: {fetchData.count} people</p>}
         {/* если есть axios данные - рендерим с ними параграф */}
-        {axiosData && <p>Axios data: {axiosData.count}</p>}
+        {axiosData && <p>Axios data: {axiosData.count} planets</p>}
       </div>
     )
   }
