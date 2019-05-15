@@ -15,12 +15,12 @@ class AsyncAwait extends Component {
     const planetsURL = 'https://swapi.co/api/planets/'
 
     const axiosResponse = await axios(planetsURL)
-    console.log(axiosResponse.data)
+    console.log('async/await axios data:', axiosResponse.data)
     this.setState({ axiosData: axiosResponse.data })
 
     const fetchResponse = await fetch(peopleURL)
     const fetchJSON = await fetchResponse.json()
-    console.log(fetchJSON)
+    console.log('async/await fetch data:', fetchJSON)
     this.setState({ fetchData: fetchJSON })
 
     // сразу несколько
@@ -32,7 +32,8 @@ class AsyncAwait extends Component {
 
     const [films, species] = await Promise.all([filmsPromise, speciesPromise])
 
-    console.log(films, species)
+    console.log('async/await films data:', films.data)
+    console.log('async/await species data:', species.data)
 
     this.setState({ films: films.data, species: species.data })
   }
