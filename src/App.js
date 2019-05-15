@@ -1,17 +1,13 @@
-import React, { Component } from 'react'
-import axios from 'axios'
+import React from 'react'
+import Usual from './Usual'
 
 // people: https://swapi.co/api/people/
 // planets: https://swapi.co/api/planets/
 
-class App extends Component {
-  render () {
-    return (
-      <div>
-        Inside App
-      </div>
-    )
-  }
-}
+const App = props => (
+  <div>
+    <Usual />
+  </div>
+)
 
 export default App
