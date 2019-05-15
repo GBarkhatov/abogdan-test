@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 class Usual extends Component {
   state = {
+    // use null by default as a good practice
     fetchData: null,
     axiosData: null
   }
