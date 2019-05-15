@@ -4,41 +4,41 @@ import axios from 'axios'
 
 class AsyncAwait extends Component {
   state = {
-    // используем null по дефолту как хорошую практику
     fetchData: null,
-    axiosData: null
+    axiosData: null,
+    films: null,
+    species: null
   }
 
-  componentDidMount () {
+  async componentDidMount () {
     const peopleURL = 'https://swapi.co/api/people/'
     const planetsURL = 'https://swapi.co/api/planets/'
 
-    axios(planetsURL)
-      .then(response => {
-        // у axios response уже сразу имеет "data" и не надо писать .json()
-        // вывожу данные в консоль, чтобы ты мог посмотреть, что еще ты можешь использовать (если интересно)
-        console.log('axios data:', response.data)
-        // использую setState, чтобы компоненты рендерились
-        this.setState({ axiosData: response.data })
-      })
-      .catch(error => console.error(error))
+    const axiosResponse = await axios(planetsURL)
+    console.log(axiosResponse.data)
+    this.setState({ axiosData: axiosResponse.data })
 
-    // fetch встроен в большинство современных браузеров
-    fetch(peopleURL)
-      // нужно респонс сконвертировать в json и передать дальше
-      .then(response => response.json())
-      .then(data => {
-        // вывожу данные в консоль, чтобы ты мог посмотреть, что еще ты можешь использовать (если интересно)
-        console.log('fetch data:', data)
-        // использую setState, чтобы компоненты рендерились
-        this.setState({ fetchData: data })
-      })
-      .catch(error => console.error(error))
+    const fetchResponse = await fetch(peopleURL)
+    const fetchJSON = await fetchResponse.json()
+    console.log(fetchJSON)
+    this.setState({ fetchData: fetchJSON })
+
+    // сразу несколько
+    const filmsURL = 'https://swapi.co/api/films/'
+    const speciesURL = 'https://swapi.co/api/species/'
+
+    const filmsPromise = axios(filmsURL)
+    const speciesPromise = axios(speciesURL)
+
+    const [films, species] = await Promise.all([filmsPromise, speciesPromise])
+
+    console.log(films, species)
+
+    this.setState({ films: films.data, species: species.data })
   }
 
   render () {
-    //  выуживаем фетч и аксиос данные из state и засовываем их в отдельные переменные для удобства
-    const { fetchData, axiosData } = this.state
+    const { fetchData, axiosData, films, species } = this.state
     return (
       <div>
         <h1>Using Star Wars API, Async/Await (newer) way</h1>
@@ -46,6 +46,9 @@ class AsyncAwait extends Component {
         {fetchData && <p>Fetch data: {fetchData.count} people</p>}
         {/* если есть axios данные - рендерим с ними параграф */}
         {axiosData && <p>Axios data: {axiosData.count} planets</p>}
+
+        {films && <p>Films: {films.count}</p>}
+        {species && <p>Species: {species.count}</p>}
       </div>
     )
   }
