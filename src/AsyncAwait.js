@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 // эта библиотека мне давно нравится куда больше, чем fetch
 import axios from 'axios'
 
-class Usual extends Component {
+class AsyncAwait extends Component {
   state = {
     // используем null по дефолту как хорошую практику
     fetchData: null,
@@ -39,7 +39,7 @@ class Usual extends Component {
     const { fetchData, axiosData } = this.state
     return (
       <div>
-        <h1>Using Star Wars API</h1>
+        <h1>Using Star Wars API, Async/Await (newer) way</h1>
         {/* если есть fetch данные - рендерим с ними параграф */}
         {fetchData && <p>Fetch data: {fetchData.count} people</p>}
         {/* если есть axios данные - рендерим с ними параграф */}
@@ -49,4 +49,4 @@ class Usual extends Component {
   }
 }
 
-export default Usual
+export default AsyncAwait

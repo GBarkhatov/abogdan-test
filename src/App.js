@@ -1,9 +1,11 @@
 import React from 'react'
-import Usual from './Usual'
+import Promise from './Promise'
+import AsyncAwait from './AsyncAwait'
 
 const App = props => (
   <div>
-    <Usual />
+    <Promise />
+    <AsyncAwait />
   </div>
 )
 
