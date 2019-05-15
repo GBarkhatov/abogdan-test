@@ -16,7 +16,10 @@ class Usual extends Component {
       // нужно респонс сконвертировать в json и передать дальше
       .then(response => response.json())
       .then(data => {
+        // вывожу данные в консоль, чтобы ты мог посмотреть, что еще ты можешь использовать (если интересно)
         console.log(data)
+        // использую setState, чтобы компоненты рендерились
+        this.setState({ fetchData: data })
       })
       .catch(error => console.error(error))
   }
